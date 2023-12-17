@@ -30,6 +30,8 @@ import { adminLogincontext } from '../context/ContextShare';
 
 
 function AddPackages() {
+  const [agencyName, setAgencyname] = useState('')
+  console.log(agencyName);
   const { adminLoggin, setAdminloggin } = useContext(adminLogincontext)
   const navigate = useNavigate()
   const [isloggin, setLoggin] = useState(false)
@@ -79,6 +81,7 @@ function AddPackages() {
   }
   useEffect(() => {
     if (sessionStorage.getItem("existingUser") && sessionStorage.Role === "Agency") {
+      setAgencyname(JSON.parse(sessionStorage.getItem("existingUser")).name)
       setLoggin(true)
 
       getPackages()
@@ -86,7 +89,7 @@ function AddPackages() {
     } else {
       toast.warning('Please login')
     }
-  }, [])
+  }, [packages,bookings])
 
   const [booking, setBooking] = useState({
     packagename: "", description: "", image: [], foodimage: [], foodDescription: [], stayimage: [], stayDescription: [], activityimages: [], activityDescription: [], placename: "", price: "", custId: user.custId
@@ -95,7 +98,13 @@ function AddPackages() {
   // console.log(booking);
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setBooking({
+      packagename: "", description: "", image: [], foodimage: [], foodDescription: [], stayimage: [], stayDescription: [], activityimages: [], activityDescription: [], placename: "", price: ""
+
+    })
+  }
   const handleShow = () => setShow(true);
   const [value, setValue] = React.useState('one');
 
@@ -194,6 +203,7 @@ function AddPackages() {
                 Add Package
               </Button>
             </Typography>
+
             <div className='md:ml-[650px] '>
               {isloggin ? <div className=''>
                 <Link onClick={(e) => Logout(e)} style={{ fontFamily: 'Poppins, sans-serif' }} className='btn btn-dark rounded-3xl w-[100px]'>Logout</Link>
@@ -217,6 +227,7 @@ function AddPackages() {
       {
         value === 'one' ?
           <div className='row p-20'>
+            <h1 className='text-3xl font-bold'>Welcome {agencyName}</h1>
             {packages.length > 0 ?
               packages.map((item) => (
                 <div className='col-lg-4'>
@@ -281,7 +292,7 @@ function AddPackages() {
                       key={row.name}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
-                      <TableCell component="th" scope="row" >{index+1}</TableCell>
+                      <TableCell component="th" scope="row" >{index + 1}</TableCell>
 
                       <TableCell >
                         {row.packagename}

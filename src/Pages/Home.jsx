@@ -66,33 +66,35 @@ function Home() {
           packages.map((item) => (
             <div className='col-lg-4'>
               <Card className='shadow md:mr-10 md:w-[350px] w-[300px] md:mt-0 mt-10 mb-4' data-aos="zoom-in-up">
-              <CardHeader
+                <CardHeader
 
-                title={item.name}
-                subheader={item.placename}
-              />
-              <CardMedia style={{ height: '250px' }} src={item.image}
-                component="img"
-                alt="Paella dish"
-              />
-              <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                  {item.description}
-                </Typography>
-              </CardContent>
-              <CardActions className='flex justify-between'>
-                <p>Contact :{item.phone} </p>
-                <Link to={`/packages/${item._id}`} className='btn btn-primary'>More Packages</Link>
+                  title={item.name}
+                  subheader={item.placename}
+                />
+                <CardMedia style={{ height: '250px' }} src={item.image}
+                  component="img"
+                  alt="Paella dish"
+                />
+                <CardContent>
+                  <Typography variant="body2" color="text.secondary">
+                    {item.description}
+                  </Typography>
+                </CardContent>
+                <CardActions className='flex justify-between'>
+                  <p>Contact :{item.phone} </p>
+                  <Link to={`/packages/${item._id}`} className='btn btn-primary'>More Packages</Link>
 
-              </CardActions>
+                </CardActions>
 
 
-            </Card>
+              </Card>
             </div>
           ))
           :
-          <p>Not Available</p>
-        }
+          <div className='flex justify-center'>
+            <p className='text-2xl'>Agencies Not Available</p>
+
+          </div>}
 
       </div>
 

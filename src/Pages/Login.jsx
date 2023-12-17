@@ -53,7 +53,7 @@ function Login() {
                 setLoggined(true)
                 navigate('/')
             } else {
-                toast.warning('incorrect email or password')
+                toast.warning(result.response.data)
             }
 
 
